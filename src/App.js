@@ -1,20 +1,35 @@
 import './App.css'
-import Calendar from './Components/Calendar'
-import { getDefaultData } from './data'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import QueryDetails from './Components/QueryDetails'
+import Calendar from './Components/Calendar'
+import { getDefaultData } from './data'
 
 function App() {
-	const [doses, setDoses] = useState([])
-
+	const [doses, setDoses] = useState([]) // doses from api
+	const [wDose, setWDose] = useState(35) // weekly dose
+	const [dateRange, setDateRange] = useState({
+		start: '2022-05-01',
+		end: '2022-05-09',
+	}) // start and end of calendar dates
+	
+	
 	useEffect(() => {
-		getCalendar()
-	}, [])
+		const defaultData = getDefaultData()
 
-  function getCalendar() {
-    const postData = getDefaultData()
+		// colect data from api
+		defaultData.weeklyDose = wDose
+		defaultData.startDate = dateRange.start
+		defaultData.endDate = dateRange.end
+
+		getCalendar(defaultData)
+		console.log(dateRange)
+	}, [wDose, dateRange])
+
+
+  function getCalendar(data) {
 		axios
-			.post(`https://stonkus.lt/node/warfarin-calendar/`, postData)
+			.post(`https://stonkus.lt/node/warfarin-calendar/`, data)
       .then((res) => {
 				setDoses(res.data)
 			})
@@ -26,7 +41,13 @@ function App() {
 				<h1>Warfarin Dose Calendar</h1>
 			</header>
 			<main>
-        <Calendar doses={doses}/>
+				<QueryDetails
+					wDose={wDose}
+					setWDose={setWDose}
+					dateRange={dateRange}
+					setDateRange={setDateRange}
+				/>
+				<Calendar doses={doses} />
 			</main>
 		</div>
 	)
