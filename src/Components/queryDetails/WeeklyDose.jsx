@@ -1,27 +1,23 @@
 function WeeklyDose({ wDose, setWDose }) {
 	return (
-		<fieldset>
-			<legend>Weekly Dose</legend>
-			<div className="">
-				<div className="input-row">
-					<label className="" htmlFor="weekly-dose">
-						Your weekly dose:
-					</label>
-					<div className="">
-						<input
-							id="weekly-dose"
-							name="weekly-dose"
-							type="number"
-							placeholder=""
-							className=""
-							style={{ width: '60px' }}
-							defaultValue={wDose}
-							onChange={(e) => setWDose(e.target.value)}
-						/> mg
-					</div>
-				</div>
+		<fieldset className="input-row">
+			<h3 className="display-6">Weekly Dose</h3>
+
+			<div className="input-group">
+				<input
+					type="text"
+					className="form-control"
+					placeholder="Weekly warfarin dose in mg"
+					aria-label="Weekly warfarin dose in mg"
+					aria-describedby="basic-addon2"
+					defaultValue={wDose}
+					onChange={(e) => setWDose(e.target.value)}
+				/>
+				<span className="input-group-text" id="basic-addon2">
+					mg.
+				</span>
 			</div>
-			<span className="input-help">
+			<span className="form-text mb-2">
 				Enter your weekly dose in mg that you use now.
 			</span>
 		</fieldset>

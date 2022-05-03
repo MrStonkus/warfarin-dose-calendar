@@ -1,32 +1,60 @@
-function Medicine() {
-	return (
-		<fieldset>
-			<legend>Medicine</legend>
+import addMedPng from '../../pics/addmedicine.png'
 
-			<table className="blueTable">
+function Medicine({ medicines }) {
+
+	const splits = {
+		"1": "full",
+		"0.5": "half",
+		"0.25": "quater",
+	}
+
+	function getParts(parts) {
+		return parts.map((part) => splits[part]).join(', ')
+	}
+
+	return (
+		<div className="input-row">
+			<h3 className="display-6">Medicine</h3>
+
+			<table className="table table-hover">
 				<thead>
 					<tr>
-						<th>Nr.</th>
-						<th>Name</th>
-						<th>Mg/tablet</th>
-						<th>Quantity</th>
-						<th>Color</th>
-						<th>Splits</th>
+						<th scope="col">Nr.</th>
+						<th scope="col">Name</th>
+						<th scope="col">Mg</th>
+						<th scope="col">Quantity</th>
+						<th scope="col">Color</th>
+						<th scope="col">Splits</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Warfarin</td>
-						<td>5</td>
-						<td>100</td>
-						<td>red</td>
-						<td>1, 0.5</td>
-					</tr>
+						{
+							medicines.map((m, i) => {
+								return (
+									<tr key={i}>
+										<td scope="row">{i + 1}</td>
+										<td>{m.name}</td>
+										<td>{m.mg}</td>
+										<td>{m.quantity}</td>
+										<td>{m.color}</td>
+										<td>{getParts(m.splitParts)}</td>
+									</tr>
+								)
+							})
+						}
+
+
+
 				</tbody>
 			</table>
-		</fieldset>
+
+			<div className="btn-add-med">
+				{/* <button className="btn"> */}
+				<img className="btn-pic" src={addMedPng} alt="Add medicine" />
+				{/* </button> */}
+			</div>
+		</div>
 	)
 }
 

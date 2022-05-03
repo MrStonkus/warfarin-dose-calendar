@@ -1,28 +1,11 @@
-let optionsData = {
-	weeklyDose: 40.74,
-	startDate: new Date('2022-04-27'),
-	nrDays: 10,
-	maxDoseMG: 10,
-	cumulDiff: 0, //cumulativeDifference, default 0 to generate new or set previous day cumu.diff number to generate from existing chedule
-	medArr: [
-		{
-			name: 'Warfarinum',
-			mg: 5,
-			quantity: 100,
-			splitParts: [1, 0.5],
-			color: 'red',
-		},
-		// {
-		// 	name: 'Warfarinum',
-		// 	mg: 3,
-		// 	quantity: 100,
-		// 	splitParts: [1],
-		// 	color: 'blue',
-		// },
-	],
+import MedModal from "./Components/MedModal"
+
+
+const medModal = {
+	title: 'Add medicine',
+	content: <MedModal />
 }
 
-export function getDefaultData() {
-	return optionsData
+export function getMedModalProps() {
+	return medModal
 }
-

@@ -2,18 +2,15 @@ import WeeklyDose from "./queryDetails/WeeklyDose"
 import Dates from "./queryDetails/Dates"
 import Medicine from "./queryDetails/Medicine"
 
-function QueryDetails({ wDose, setWDose, dateRange, setDateRange }) {
-	console.log(dateRange.start, dateRange.end)
-
+function QueryDetails({ wDose, setWDose, dateRange, setDateRange, medicines }) {
 	return (
-		<div className="pd-2">
-			<h2>Query Details</h2>
+		<div className="p-4">
 			<WeeklyDose wDose={wDose} setWDose={setWDose} />
 			<Dates
 				dateRange={{ start: dateRange.start, end: dateRange.end }}
 				setDateRange={setDateRange}
 			/>
-			<Medicine />
+			<Medicine medicines={medicines} />
 		</div>
 	)
 }

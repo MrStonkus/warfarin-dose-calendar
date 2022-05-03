@@ -3,37 +3,66 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import QueryDetails from './Components/QueryDetails'
 import Calendar from './Components/Calendar'
-import { getDefaultData } from './data'
+import { getMedModalProps } from './data'
+import Modal from './Components/Modal'
 
 function App() {
 	const [doses, setDoses] = useState([]) // doses from api
-	const [wDose, setWDose] = useState(35) // weekly dose
-	const [dateRange, setDateRange] = useState({
-		start: '2022-05-01',
-		end: '2022-05-09',
-	}) // start and end of calendar dates
-	
-	
+	const [wDose, setWDose] = useState(0) // weekly dose
+	const [dateRange, setDateRange] = useState() // start and end of calendar dates object start:, end:
+	const [medicines, setMedicines] = useState([])
+	const [isMedModalOpen, setMedModal] = useState(false) // modal for adding new med
+	const [isInputs, setIsInputs] = useState(false)
+
+	// first time on load
 	useEffect(() => {
-		const defaultData = getDefaultData()
+		let data = localStorage.getItem('data')
 
-		// colect data from api
-		defaultData.weeklyDose = wDose
-		defaultData.startDate = dateRange.start
-		defaultData.endDate = dateRange.end
+		if (!data) {
+			data = {}
+			//set default data
+			data.weeklyDose = 41
+			data.startDate = '2022-04-06'
+			data.endDate = '2022-05-01'
+			data.medArr = [
+				{
+					name: 'Warfarinum',
+					mg: 5,
+					quantity: 100,
+					splitParts: [1, 0.5],
+					color: 'red',
+				}
+			]
+		}
+		// set data
+		setWDose(data.weeklyDose)
 
-		getCalendar(defaultData)
-		console.log(dateRange)
-	}, [wDose, dateRange])
+		setDateRange({
+			start: data.startDate,
+			end: data.endDate,
+		})
+		setMedicines(data.medArr)
+		setIsInputs(true)
+	}, [])
 
+	useEffect(() => {
+		if (!isInputs) return
+		const data = {
+			weeklyDose: wDose,
+			startDate: dateRange.start,
+			endDate: dateRange.end,
+			medArr: medicines,
+		}
 
-  function getCalendar(data) {
-		axios
-			.post(`https://stonkus.lt/node/warfarin-calendar/`, data)
-      .then((res) => {
-				setDoses(res.data)
-			})
+		getCalendar(data)
+	}, [isInputs, wDose, dateRange, medicines])
+
+	function getCalendar(data) {
+		axios.post(`https://stonkus.lt/node/warfarin-calendar/`, data).then((res) => {
+			setDoses(res.data)
+		})
 	}
+
 
 	return (
 		<div className="App">
@@ -41,14 +70,25 @@ function App() {
 				<h1>Warfarin Dose Calendar</h1>
 			</header>
 			<main>
-				<QueryDetails
-					wDose={wDose}
-					setWDose={setWDose}
-					dateRange={dateRange}
-					setDateRange={setDateRange}
-				/>
-				<Calendar doses={doses} />
+				{isInputs ? (
+					<>
+						<QueryDetails
+							wDose={wDose}
+							setWDose={setWDose}
+							dateRange={dateRange}
+							setDateRange={setDateRange}
+							medicines={medicines}
+						/>
+						<Calendar doses={doses} />
+					</>
+				) : (
+					<h2>No default input data!</h2>
+				)}
 			</main>
+
+			{isMedModalOpen ? (
+				<Modal options={getMedModalProps()} setMedModal={setMedModal} />
+			) : null}
 		</div>
 	)
 }
