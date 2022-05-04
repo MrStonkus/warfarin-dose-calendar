@@ -43,6 +43,4 @@ function Dates({ dateRange, setDateRange }) {
 		</div>
 	)
 }
-// TODO padaryti kad to negalėtų būti parinktas mažesnis nei from
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
 export default Dates

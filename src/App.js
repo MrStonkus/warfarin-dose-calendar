@@ -16,7 +16,9 @@ function App() {
 
 	// first time on load
 	useEffect(() => {
-		let data = localStorage.getItem('data')
+		// let data = localStorage.getItem('data')
+		let data = JSON.parse(localStorage.getItem('data'))
+		console.log(data)
 
 		if (!data) {
 			data = {}
@@ -43,6 +45,7 @@ function App() {
 		})
 		setMedicines(data.medArr)
 		setIsInputs(true)
+		localStorage.setItem('data', JSON.stringify(data))
 	}, [])
 
 	useEffect(() => {
@@ -55,6 +58,7 @@ function App() {
 		}
 
 		getCalendar(data)
+		localStorage.setItem('data', JSON.stringify(data))
 	}, [isInputs, wDose, dateRange, medicines])
 
 	function getCalendar(data) {

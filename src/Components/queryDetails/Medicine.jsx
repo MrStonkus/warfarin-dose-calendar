@@ -57,5 +57,5 @@ function Medicine({ medicines }) {
 		</div>
 	)
 }
-
+// TODO pridėti redagavimą, pridėjimą, ištrynimą
 export default Medicine
