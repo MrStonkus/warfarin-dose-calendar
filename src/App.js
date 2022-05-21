@@ -3,22 +3,23 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import QueryDetails from './Components/QueryDetails'
 import Calendar from './Components/Calendar'
-import { getMedModalProps } from './data'
-import Modal from './Components/Modal'
+// import { getMedModalProps } from './data'
+// import Modal from './Components/Modal'
+import { v4 as uuidv4 } from 'uuid'
 
 function App() {
 	const [doses, setDoses] = useState([]) // doses from api
 	const [wDose, setWDose] = useState(0) // weekly dose
 	const [dateRange, setDateRange] = useState() // start and end of calendar dates object start:, end:
 	const [medicines, setMedicines] = useState([])
-	const [isMedModalOpen, setMedModal] = useState(false) // modal for adding new med
+	// const [isMedModalOpen, setMedModal] = useState(false) // modal for adding new med
 	const [isInputs, setIsInputs] = useState(false)
 
 	// first time on load
 	useEffect(() => {
-		// let data = localStorage.getItem('data')
-		let data = JSON.parse(localStorage.getItem('data'))
-		console.log(data)
+		let data = JSON.parse(localStorage.getItem('data')) // get data from local storage
+		// TODO add data verify
+		// verifyData(data)
 
 		if (!data) {
 			data = {}
@@ -28,12 +29,13 @@ function App() {
 			data.endDate = '2022-05-01'
 			data.medArr = [
 				{
+					id: uuidv4(),
 					name: 'Warfarinum',
 					mg: 5,
 					quantity: 100,
 					splitParts: [1, 0.5],
 					color: 'red',
-				}
+				},
 			]
 		}
 		// set data
@@ -44,6 +46,8 @@ function App() {
 			end: data.endDate,
 		})
 		setMedicines(data.medArr)
+		// console.log(data.medArr)
+
 		setIsInputs(true)
 		localStorage.setItem('data', JSON.stringify(data))
 	}, [])
@@ -62,7 +66,7 @@ function App() {
 	}, [isInputs, wDose, dateRange, medicines])
 
 	function getCalendar(data) {
-		axios.post(`https://stonkus.lt/node/warfarin-calendar/`, data).then((res) => {
+		axios.post(`https://stonkus.lt/api/inr/`, data).then((res) => {
 			setDoses(res.data)
 		})
 	}
@@ -81,6 +85,7 @@ function App() {
 							setWDose={setWDose}
 							dateRange={dateRange}
 							setDateRange={setDateRange}
+							setMedicines={setMedicines}
 							medicines={medicines}
 						/>
 						<Calendar doses={doses} />
@@ -90,9 +95,9 @@ function App() {
 				)}
 			</main>
 
-			{isMedModalOpen ? (
+			{/* {isMedModalOpen ? (
 				<Modal options={getMedModalProps()} setMedModal={setMedModal} />
-			) : null}
+			) : null} */}
 		</div>
 	)
 }

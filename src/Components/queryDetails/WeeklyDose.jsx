@@ -12,6 +12,7 @@ function WeeklyDose({ wDose, setWDose }) {
 					aria-describedby="basic-addon2"
 					defaultValue={wDose}
 					onChange={(e) => setWDose(e.target.value)}
+					required
 				/>
 				<span className="input-group-text" id="basic-addon2">
 					mg.
