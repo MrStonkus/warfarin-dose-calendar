@@ -1,10 +1,14 @@
-import { useState } from 'react'
-import addMedPng from '../../pics/addmedicine.png'
+import { useEffect, useRef, useState } from 'react'
 import AddMedicineModal from '../modals/AddMedicineModal'
+// import ActionConfirmModal from '../modals/ActionConfirmModal'
+import MedicineTableRow from './MedicineTableRow'
 
 function Medicine({ medicines, setMedicines }) {
-	const [isShowActions, setIsShowActions] = useState(false)
-
+	// const [showButtons, setShowButtons] = useState(false)
+	// const [showActions, setShowActions] = useState(false)
+	const [showEditIcon, setShowEditIcon] = useState(false)
+	const [isEditIconActive, setEditIconActive] = useState(false)
+	const [isMouseInMedArea, setIsMouseInMedArea] = useState(false)
 	const splits = {
 		1: 'full',
 		0.5: 'half',
@@ -20,10 +24,70 @@ function Medicine({ medicines, setMedicines }) {
 		setMedicines(newMedicines)
 	}
 
-	return (
-		<div className="input-row">
-			<h3 className="display-6">Medicine</h3>
 
+	let timer = useRef(null)
+
+	useEffect(() => {
+		if (isMouseInMedArea) {
+			console.log('pelė viduje')
+
+			if (timer) clearTimeout(timer.current)
+
+			setShowEditIcon(true)
+		} else {
+			console.log('pelė lauke')
+
+			if (!isEditIconActive) setShowEditIcon(false)
+
+			timer.current = setTimeout(() => {
+				setEditIconActive(false)
+				setShowEditIcon(false)
+			}, 5000)
+
+			return () => clearTimeout(timer)
+		}
+	}, [isMouseInMedArea, isEditIconActive])
+
+	return (
+		<div
+			className="input-row "
+			onMouseEnter={(e) => {
+				setIsMouseInMedArea(true)
+			}}
+			onMouseLeave={(e) => {
+				setIsMouseInMedArea(false)
+			}}
+		>
+			<div className="input-row-title d-flex justify-content-between">
+				{/* TODO padaryti update ir ištrynimus kai paspaudžiama ant eilutės */}
+				{/* NOTE Padidinti visą UI, mugtukus */}
+				<div className="d-flex">
+					<h3 className="display-6">Medicine</h3>
+					{showEditIcon ? (
+						<button
+							type="button"
+							className="btn text-dark"
+							onClick={() => setEditIconActive((e) => !e)}
+						>
+							<i
+								className={isEditIconActive ? 'bi bi-pencil-fill' : 'bi bi-pencil'}
+							></i>
+						</button>
+					) : null}
+				</div>
+
+				{/* <!-- Button trigger add medicine modal --> */}
+				{isEditIconActive ? (
+					<button
+						type="button"
+						className="btn  text-info"
+						data-bs-toggle="modal"
+						data-bs-target="#addMedicineModal"
+					>
+						<i className="bi bi-plus-square"></i> New
+					</button>
+				) : null}
+			</div>
 			<table className="table table-hover">
 				<thead>
 					<tr>
@@ -37,42 +101,22 @@ function Medicine({ medicines, setMedicines }) {
 				</thead>
 
 				<tbody>
-					{medicines.map((m, i) => {
+					{medicines.map((med, index) => {
 						return (
-							<tr
-								key={i}
-								className="med-row"
-								onClick={() => setIsShowActions((e) => !e)}
-							>
-								<td>{i + 1}</td>
-								<td>{m.name}</td>
-								<td>{m.mg}</td>
-								<td>{m.quantity}</td>
-								<td>{m.color}</td>
-								<td>{getParts(m.splitParts)}</td>
-								{isShowActions ? (
-									<td className="med-actions" onClick={() => deleteMed(m.id)}>
-										Delete
-									</td>
-								) : null}
-							</tr>
+							<MedicineTableRow
+								key={index}
+								med={med}
+								index={index}
+								getParts={getParts}
+								deleteMed={deleteMed}
+								isEditIconActive={isEditIconActive}
+								setEditIconActive={setEditIconActive}
+							/>
 						)
 					})}
 				</tbody>
 			</table>
 
-			<div className="btn-add-med">
-				{/* <!-- Button trigger modal --> */}
-				<button
-					type="button"
-					className="btn"
-					data-bs-toggle="modal"
-					data-bs-target="#addMedicineModal"
-				>
-					<img className="btn-pic" src={addMedPng} alt="Add medicine" />
-				</button>
-			</div>
-			
 			<AddMedicineModal medicines={medicines} setMedicines={setMedicines} />
 		</div>
 	)

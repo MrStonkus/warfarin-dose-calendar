@@ -24,9 +24,9 @@ function App() {
 		if (!data) {
 			data = {}
 			//set default data
-			data.weeklyDose = 41
-			data.startDate = '2022-04-06'
-			data.endDate = '2022-05-01'
+			data.weeklyDose = 42.8
+			data.startDate = '2022-05-21'
+			data.endDate = '2022-06-21'
 			data.medArr = [
 				{
 					id: uuidv4(),
