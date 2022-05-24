@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+
+import DeteleModal from '../modals/DeteleModal'
 
 function MedicineTableRow({
 	med,
@@ -59,22 +59,12 @@ function MedicineTableRow({
 								<i className="bi bi-trash3 "></i>
 							</button>
 							{/* modal confirmation */}
-							<Modal show={show} onHide={handleClose}>
-								<Modal.Header closeButton>
-									<Modal.Title>Confirm delete</Modal.Title>
-								</Modal.Header>
-								<Modal.Body>
-									<span>{medDescription}</span>
-								</Modal.Body>
-								<Modal.Footer>
-									<Button variant="secondary" onClick={handleClose}>
-										Cancel
-									</Button>
-									<Button variant="danger" onClick={handleDelete}>
-										Delete
-									</Button>
-								</Modal.Footer>
-							</Modal>
+							<DeteleModal
+								show={show}
+								handleClose={handleClose}
+								handleDelete={handleDelete}
+								bodyContent={medDescription}
+							/>
 						</div>
 					</div>
 				</td>
