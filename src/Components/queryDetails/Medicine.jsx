@@ -50,7 +50,7 @@ function Medicine({ medicines, setMedicines }) {
 			}}
 		>
 			<div className="input-row-title d-flex justify-content-between">
-				{/* TODO padaryti update ir ištrynimus kai paspaudžiama ant eilutės */}
+				{/* TODO padaryti update*/}
 				{/* NOTE Padidinti visą UI, mugtukus https://react-bootstrap.github.io/layout/grid/ */}
 				<div className="d-flex">
 					<h3 className="display-6">Medicine</h3>
