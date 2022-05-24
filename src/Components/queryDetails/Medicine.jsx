@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import AddMedicineModal from '../modals/AddMedicineModal'
-// import ActionConfirmModal from '../modals/ActionConfirmModal'
 import MedicineTableRow from './MedicineTableRow'
 
 function Medicine({ medicines, setMedicines }) {
-	// const [showButtons, setShowButtons] = useState(false)
-	// const [showActions, setShowActions] = useState(false)
+	
 	const [showEditIcon, setShowEditIcon] = useState(false)
 	const [isEditIconActive, setEditIconActive] = useState(false)
 	const [isMouseInMedArea, setIsMouseInMedArea] = useState(false)
@@ -14,6 +12,7 @@ function Medicine({ medicines, setMedicines }) {
 		0.5: 'half',
 		0.25: 'quater',
 	}
+
 
 	function getParts(parts) {
 		return parts.map((part) => splits[part]).join(', ')
@@ -24,26 +23,18 @@ function Medicine({ medicines, setMedicines }) {
 		setMedicines(newMedicines)
 	}
 
-
+	// handle mouse onver edit and med element activity
 	let timer = useRef(null)
-
 	useEffect(() => {
 		if (isMouseInMedArea) {
-			console.log('pelė viduje')
-
 			if (timer) clearTimeout(timer.current)
-
 			setShowEditIcon(true)
 		} else {
-			console.log('pelė lauke')
-
 			if (!isEditIconActive) setShowEditIcon(false)
-
 			timer.current = setTimeout(() => {
 				setEditIconActive(false)
 				setShowEditIcon(false)
-			}, 5000)
-
+			}, 600000)
 			return () => clearTimeout(timer)
 		}
 	}, [isMouseInMedArea, isEditIconActive])
@@ -60,7 +51,7 @@ function Medicine({ medicines, setMedicines }) {
 		>
 			<div className="input-row-title d-flex justify-content-between">
 				{/* TODO padaryti update ir ištrynimus kai paspaudžiama ant eilutės */}
-				{/* NOTE Padidinti visą UI, mugtukus */}
+				{/* NOTE Padidinti visą UI, mugtukus https://react-bootstrap.github.io/layout/grid/ */}
 				<div className="d-flex">
 					<h3 className="display-6">Medicine</h3>
 					{showEditIcon ? (
@@ -87,6 +78,7 @@ function Medicine({ medicines, setMedicines }) {
 						<i className="bi bi-plus-square"></i> New
 					</button>
 				) : null}
+				{/* <!-- Button trigger add medicine modal --> */}
 			</div>
 			<table className="table table-hover">
 				<thead>
@@ -110,7 +102,6 @@ function Medicine({ medicines, setMedicines }) {
 								getParts={getParts}
 								deleteMed={deleteMed}
 								isEditIconActive={isEditIconActive}
-								setEditIconActive={setEditIconActive}
 							/>
 						)
 					})}

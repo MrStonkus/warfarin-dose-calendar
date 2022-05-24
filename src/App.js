@@ -3,17 +3,41 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import QueryDetails from './Components/QueryDetails'
 import Calendar from './Components/Calendar'
-// import { getMedModalProps } from './data'
-// import Modal from './Components/Modal'
 import { v4 as uuidv4 } from 'uuid'
+
+import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
 
 function App() {
 	const [doses, setDoses] = useState([]) // doses from api
 	const [wDose, setWDose] = useState(0) // weekly dose
 	const [dateRange, setDateRange] = useState() // start and end of calendar dates object start:, end:
 	const [medicines, setMedicines] = useState([])
-	// const [isMedModalOpen, setMedModal] = useState(false) // modal for adding new med
 	const [isInputs, setIsInputs] = useState(false)
+
+	const DelConfirmModal = () => {
+		const [show, toggleShow] = useState(true)
+
+		return (
+			<>
+				{!show && <Button onClick={() => toggleShow(true)}>Show Toast</Button>}
+				<Modal.Dialog>
+					<Modal.Header closeButton>
+						<Modal.Title>Modal title</Modal.Title>
+					</Modal.Header>
+
+					<Modal.Body>
+						<p>Modal body text goes here.</p>
+					</Modal.Body>
+
+					<Modal.Footer>
+						<Button variant="secondary">Close</Button>
+						<Button variant="primary">Save changes</Button>
+					</Modal.Footer>
+				</Modal.Dialog>
+			</>
+		)
+	}
 
 	// first time on load
 	useEffect(() => {
@@ -52,6 +76,7 @@ function App() {
 		localStorage.setItem('data', JSON.stringify(data))
 	}, [])
 
+	// update local storage
 	useEffect(() => {
 		if (!isInputs) return
 		const data = {
@@ -70,7 +95,6 @@ function App() {
 			setDoses(res.data)
 		})
 	}
-
 
 	return (
 		<div className="App">
@@ -94,10 +118,6 @@ function App() {
 					<h2>No default input data!</h2>
 				)}
 			</main>
-
-			{/* {isMedModalOpen ? (
-				<Modal options={getMedModalProps()} setMedModal={setMedModal} />
-			) : null} */}
 		</div>
 	)
 }
