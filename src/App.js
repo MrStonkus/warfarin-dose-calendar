@@ -5,9 +5,6 @@ import QueryDetails from './Components/QueryDetails'
 import Calendar from './Components/Calendar'
 import { v4 as uuidv4 } from 'uuid'
 
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
-
 function App() {
 	const [doses, setDoses] = useState([]) // doses from api
 	const [wDose, setWDose] = useState(0) // weekly dose
@@ -15,39 +12,10 @@ function App() {
 	const [medicines, setMedicines] = useState([])
 	const [isInputs, setIsInputs] = useState(false)
 
-	const DelConfirmModal = () => {
-		const [show, toggleShow] = useState(true)
-
-		return (
-			<>
-				{!show && <Button onClick={() => toggleShow(true)}>Show Toast</Button>}
-				<Modal.Dialog>
-					<Modal.Header closeButton>
-						<Modal.Title>Modal title</Modal.Title>
-					</Modal.Header>
-
-					<Modal.Body>
-						<p>Modal body text goes here.</p>
-					</Modal.Body>
-
-					<Modal.Footer>
-						<Button variant="secondary">Close</Button>
-						<Button variant="primary">Save changes</Button>
-					</Modal.Footer>
-				</Modal.Dialog>
-			</>
-		)
-	}
-
-	// first time on load
 	useEffect(() => {
 		let data = JSON.parse(localStorage.getItem('data')) // get data from local storage
-		// TODO add data verify
-		// verifyData(data)
-
 		if (!data) {
 			data = {}
-			//set default data
 			data.weeklyDose = 42.8
 			data.startDate = '2022-05-21'
 			data.endDate = '2022-06-21'
@@ -62,16 +30,12 @@ function App() {
 				},
 			]
 		}
-		// set data
 		setWDose(data.weeklyDose)
-
 		setDateRange({
 			start: data.startDate,
 			end: data.endDate,
 		})
 		setMedicines(data.medArr)
-		// console.log(data.medArr)
-
 		setIsInputs(true)
 		localStorage.setItem('data', JSON.stringify(data))
 	}, [])
@@ -85,7 +49,6 @@ function App() {
 			endDate: dateRange.end,
 			medArr: medicines,
 		}
-
 		getCalendar(data)
 		localStorage.setItem('data', JSON.stringify(data))
 	}, [isInputs, wDose, dateRange, medicines])
@@ -97,13 +60,15 @@ function App() {
 	}
 
 	return (
-		<div className="App">
+		<div className="App container">
 			<header className="App-header">
 				<h1>Warfarin Dose Calendar</h1>
 			</header>
 			<main>
 				{isInputs ? (
-					<>
+					<div class="container">
+					<div class="row">
+						<div class="col-md">
 						<QueryDetails
 							wDose={wDose}
 							setWDose={setWDose}
@@ -112,8 +77,12 @@ function App() {
 							setMedicines={setMedicines}
 							medicines={medicines}
 						/>
+						</div>
+						<div class="col-md">
 						<Calendar doses={doses} />
-					</>
+						</div>
+					</div>
+					</div>
 				) : (
 					<h2>No default input data!</h2>
 				)}

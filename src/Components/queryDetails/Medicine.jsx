@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import AddMedicineModal from '../modals/AddMedicineModal'
 import MedicineTableRow from './MedicineTableRow'
+import SimpleBarReact from "simplebar-react";
+import "simplebar/src/simplebar.css";
+
 
 function Medicine({ medicines, setMedicines }) {
-	
+
 	const [showEditIcon, setShowEditIcon] = useState(false)
 	const [isEditIconActive, setEditIconActive] = useState(false)
 	const [isMouseInMedArea, setIsMouseInMedArea] = useState(false)
@@ -51,9 +54,8 @@ function Medicine({ medicines, setMedicines }) {
 		>
 			<div className="input-row-title d-flex justify-content-between">
 				{/* TODO padaryti update*/}
-				{/* NOTE Padidinti visą UI, mugtukus https://react-bootstrap.github.io/layout/grid/ */}
 				<div className="d-flex">
-					<h3 className="display-6">Medicine</h3>
+					<h3 className="display-5">Medicine</h3>
 					{showEditIcon ? (
 						<button
 							type="button"
@@ -80,33 +82,35 @@ function Medicine({ medicines, setMedicines }) {
 				) : null}
 				{/* <!-- Button trigger add medicine modal --> */}
 			</div>
-			<table className="table table-hover">
-				<thead>
-					<tr>
-						<th scope="col">Nr.</th>
-						<th scope="col">Name</th>
-						<th scope="col">Mg</th>
-						<th scope="col">Quantity</th>
-						<th scope="col">Color</th>
-						<th scope="col">Splits</th>
-					</tr>
-				</thead>
+			<SimpleBarReact style={{ maxHeight: 400 }}>
+				<table className="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Name</th>
+							<th scope="col">Mg</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">Color</th>
+							<th scope="col">Splits</th>
+						</tr>
+					</thead>
 
-				<tbody>
-					{medicines.map((med, index) => {
-						return (
-							<MedicineTableRow
-								key={index}
-								med={med}
-								index={index}
-								getParts={getParts}
-								deleteMed={deleteMed}
-								isEditIconActive={isEditIconActive}
-							/>
-						)
-					})}
-				</tbody>
-			</table>
+					<tbody>
+						{medicines.map((med, index) => {
+							return (
+								<MedicineTableRow
+									key={index}
+									med={med}
+									index={index}
+									getParts={getParts}
+									deleteMed={deleteMed}
+									isEditIconActive={isEditIconActive}
+								/>
+							)
+						})}
+					</tbody>
+				</table>
+			</SimpleBarReact>
 
 			<AddMedicineModal medicines={medicines} setMedicines={setMedicines} />
 		</div>

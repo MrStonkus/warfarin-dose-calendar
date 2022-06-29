@@ -11,10 +11,10 @@ function DeteleModal({ show, handleClose, handleDelete, bodyContent }) {
 				<span>{bodyContent}</span>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button variant="secondary" onClick={handleClose}>
+				<Button variant="outline-secondary" onClick={handleClose}>
 					Cancel
 				</Button>
-				<Button variant="danger" onClick={handleDelete}>
+				<Button variant="outline-danger" onClick={handleDelete}>
 					Delete
 				</Button>
 			</Modal.Footer>
