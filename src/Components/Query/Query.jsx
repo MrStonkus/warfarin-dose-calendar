@@ -1,6 +1,6 @@
-import WeeklyDose from "./queryDetails/WeeklyDose"
-import Dates from "./queryDetails/Dates"
-import Medicine from "./queryDetails/Medicine"
+import WeeklyDose from "./WeeklyDose"
+import Dates from "./Dates"
+import Medicine from "./Medicine"
 
 function QueryDetails({
 	wDose,

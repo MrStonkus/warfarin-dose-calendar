@@ -1,7 +1,7 @@
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
-function DeteleModal({ show, handleClose, handleDelete, bodyContent }) {
+function DeleteModal({ show, handleClose, handleDelete, bodyContent }) {
 	return (
 		<Modal show={show} onHide={handleClose}>
 			<Modal.Header closeButton>
@@ -21,4 +21,4 @@ function DeteleModal({ show, handleClose, handleDelete, bodyContent }) {
 		</Modal>
 	)
 }
-export default DeteleModal
+export default DeleteModal

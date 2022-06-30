@@ -1,22 +1,34 @@
 import { useState } from 'react'
 
-import DeteleModal from '../modals/DeteleModal'
+import EditModal from '../../modals/EditModal'
+import DeleteModal from '../../modals/DeleteModal'
 
 function MedicineTableRow({
 	med,
 	index,
 	getParts,
 	deleteMed,
+	updateMed,
 	isEditIconActive,
 }) {
-	const [show, setShow] = useState(false)
+	const [showDeleteModal, setShowDeleteModal] = useState(false)
+	const [showEditModal, setShowEditModal] = useState(false)
 
-	const handleShow = () => setShow(true)
-	const handleClose = () => setShow(false)
+
+	const handleDeleteModal = () => setShowDeleteModal(true)
+	const handleEditModal = () => setShowEditModal(true)
+
+	const handleClose = () => {
+		setShowDeleteModal(false)
+		setShowEditModal(false)
+	}
+
 	const handleDelete = () => {
 		deleteMed(med.id)
-		setShow(false)
+		setShowDeleteModal(false)
 	}
+
+
 	const medNr = index + 1
 	const medDescription = `Medicine: Nr. ${medNr}, ${med.name} - ${med.mg} mg. ${med.quantity} pcs.`
 
@@ -44,8 +56,7 @@ function MedicineTableRow({
 							<button
 								type="button"
 								className="btn btn-outline-secondary text-info"
-								data-bs-toggle="modal2"
-								data-bs-target="#action-confirm-modal"
+								onClick={handleEditModal}
 							>
 								<i className="bi bi-pen"></i>
 							</button>
@@ -54,16 +65,22 @@ function MedicineTableRow({
 							<button
 								type="button"
 								className="btn btn-outline-secondary text-danger"
-								onClick={handleShow}
+								onClick={handleDeleteModal}
 							>
 								<i className="bi bi-trash3 "></i>
 							</button>
 							{/* modal confirmation */}
-							<DeteleModal
-								show={show}
+							<DeleteModal
+								show={showDeleteModal}
 								handleClose={handleClose}
 								handleDelete={handleDelete}
 								bodyContent={medDescription}
+							/>
+							<EditModal
+								show={showEditModal}
+								handleClose={handleClose}
+								medDetails={med}
+								updateMed={updateMed}
 							/>
 						</div>
 					</div>

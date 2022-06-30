@@ -1,39 +1,18 @@
 import { useRef, useState } from 'react'
-import InputComp from '../inputs/InputComp'
-import SelectComp from '../inputs/SelectComp'
-import CheckComp from '../inputs/CheckComp'
+import InputComp from './inputs/InputComp'
+import SelectComp from './inputs/SelectComp'
+import CheckComp from './inputs/CheckComp'
 import { v4 as uuidv4 } from 'uuid'
+import { colorOptions, defSplits } from '../../options/medicineOptions'
 
 function AddMedicineModal({ medicines, setMedicines }) {
 	const closeBtn = useRef(null)
 	const [name, setName] = useState('')
 	const [mg, setMg] = useState('')
 	const [quantity, setQuantity] = useState('')
-	const colorOptions = [
-		{ value: '', label: 'Please select' },
-		{ value: 'red', label: 'Red' },
-		{ value: 'blue', label: 'Blue' },
-		{ value: 'white', label: 'White' },
-	]
 	const [color, setColor] = useState('')
-	const defSplits = [
-		{ value: '1', label: 'Full tablet', isChecked: true, isDisabled: true },
-		{
-			value: '0.5',
-			label: 'Half of tablet',
-			isChecked: false,
-			isDisabled: false,
-		},
-		{
-			value: '0.25',
-			label: 'Quater of tablet',
-			isChecked: false,
-			isDisabled: false,
-		},
-	]
 	const [splits, setSplits] = useState(defSplits)
 
-	// sumbit button pressed
 	const onSubmit = (event, closeBtn) => {
 		// stop the form from submitting
 		event.preventDefault()
@@ -131,7 +110,7 @@ function AddMedicineModal({ medicines, setMedicines }) {
 								label="Splits"
 								splits={splits}
 								setSplits={setSplits}
-								help="Check all posible tablet splits."
+								help="Check all possible tablet splits."
 							></CheckComp>
 
 							<div className="form-label mb-4">

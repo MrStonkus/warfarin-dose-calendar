@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import AddMedicineModal from '../modals/AddMedicineModal'
+import AddMedicineModal from '../../modals/AddMedicineModal'
 import MedicineTableRow from './MedicineTableRow'
 import SimpleBarReact from "simplebar-react";
 import "simplebar/src/simplebar.css";
@@ -26,7 +26,18 @@ function Medicine({ medicines, setMedicines }) {
 		setMedicines(newMedicines)
 	}
 
-	// handle mouse onver edit and med element activity
+	function updateMed(med) {
+		const newMedicines = medicines.map((medicine) => {
+			if (medicine.id === med.id) {
+				return med
+			}
+			return medicine
+		})
+		setMedicines(newMedicines)
+
+	}
+
+	// handle mouse over edit and med element activity
 	let timer = useRef(null)
 	useEffect(() => {
 		if (isMouseInMedArea) {
@@ -104,6 +115,7 @@ function Medicine({ medicines, setMedicines }) {
 									index={index}
 									getParts={getParts}
 									deleteMed={deleteMed}
+									updateMed={updateMed}
 									isEditIconActive={isEditIconActive}
 								/>
 							)

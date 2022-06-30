@@ -1,7 +1,7 @@
 import './App.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import QueryDetails from './Components/QueryDetails'
+import QueryDetails from './Components/Query'
 import Calendar from './Components/Calendar'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -66,9 +66,9 @@ function App() {
 			</header>
 			<main>
 				{isInputs ? (
-					<div class="container">
-					<div class="row">
-						<div class="col-md">
+					<div className="container">
+					<div className="row">
+						<div className="col-md">
 						<QueryDetails
 							wDose={wDose}
 							setWDose={setWDose}
@@ -78,7 +78,7 @@ function App() {
 							medicines={medicines}
 						/>
 						</div>
-						<div class="col-md">
+						<div className="col-md">
 						<Calendar doses={doses} />
 						</div>
 					</div>

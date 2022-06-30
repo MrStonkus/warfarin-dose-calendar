@@ -5,9 +5,9 @@ function Dates({ dateRange, setDateRange }) {
 			<h3 className="display-5">Dates</h3>
 			<div className="input-group mb-2">
 
-				<div class="container-fluid p-0">
-					<div class="row">
-						<div class="col">
+				<div className="container-fluid p-0">
+					<div className="row">
+						<div className="col">
 							<div className="me-3">
 								<label htmlFor="start-date">From:</label>
 								<div className="">
@@ -26,7 +26,7 @@ function Dates({ dateRange, setDateRange }) {
 								<span className="form-text mb-3">Generate from date</span>
 							</div>
 						</div>
-						<div class="col">
+						<div className="col">
 							<div className="">
 								<label htmlFor="end-date">To:</label>
 								<div className="">
