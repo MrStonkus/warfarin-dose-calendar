@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import QueryDetails from './Components/Query'
 import Calendar from './Components/Calendar'
-import { v4 as uuidv4 } from 'uuid'
+import { defData } from './options/medicineOptions'
 
 function App() {
 	const [doses, setDoses] = useState([]) // doses from api
@@ -15,20 +15,7 @@ function App() {
 	useEffect(() => {
 		let data = JSON.parse(localStorage.getItem('data')) // get data from local storage
 		if (!data) {
-			data = {}
-			data.weeklyDose = 42.8
-			data.startDate = '2022-05-21'
-			data.endDate = '2022-06-21'
-			data.medArr = [
-				{
-					id: uuidv4(),
-					name: 'Warfarinum',
-					mg: 5,
-					quantity: 100,
-					splitParts: [1, 0.5],
-					color: 'red',
-				},
-			]
+			data = {...defData}
 		}
 		setWDose(data.weeklyDose)
 		setDateRange({

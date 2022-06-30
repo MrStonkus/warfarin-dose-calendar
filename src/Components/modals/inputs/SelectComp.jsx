@@ -27,7 +27,6 @@ function SelectComp({ label, color, setColor, options, help, required }) {
 					})}
 				</select>
 			</div>
-
 			<div className="form-text">{help}</div>
 		</div>
 	)

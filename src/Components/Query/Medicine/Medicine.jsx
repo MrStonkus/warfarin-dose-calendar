@@ -16,7 +16,6 @@ function Medicine({ medicines, setMedicines }) {
 		0.25: 'quater',
 	}
 
-
 	function getParts(parts) {
 		return parts.map((part) => splits[part]).join(', ')
 	}
@@ -34,7 +33,6 @@ function Medicine({ medicines, setMedicines }) {
 			return medicine
 		})
 		setMedicines(newMedicines)
-
 	}
 
 	// handle mouse over edit and med element activity

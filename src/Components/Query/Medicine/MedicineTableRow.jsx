@@ -14,7 +14,6 @@ function MedicineTableRow({
 	const [showDeleteModal, setShowDeleteModal] = useState(false)
 	const [showEditModal, setShowEditModal] = useState(false)
 
-
 	const handleDeleteModal = () => setShowDeleteModal(true)
 	const handleEditModal = () => setShowEditModal(true)
 
@@ -27,7 +26,6 @@ function MedicineTableRow({
 		deleteMed(med.id)
 		setShowDeleteModal(false)
 	}
-
 
 	const medNr = index + 1
 	const medDescription = `Medicine: Nr. ${medNr}, ${med.name} - ${med.mg} mg. ${med.quantity} pcs.`
@@ -52,7 +50,6 @@ function MedicineTableRow({
 							role="group"
 							aria-label="Edit and Delete buttons"
 						>
-							{/* Edit button ----- */}
 							<button
 								type="button"
 								className="btn btn-outline-secondary text-info"
@@ -60,8 +57,6 @@ function MedicineTableRow({
 							>
 								<i className="bi bi-pen"></i>
 							</button>
-
-							{/* Delete button ----- */}
 							<button
 								type="button"
 								className="btn btn-outline-secondary text-danger"
@@ -69,7 +64,6 @@ function MedicineTableRow({
 							>
 								<i className="bi bi-trash3 "></i>
 							</button>
-							{/* modal confirmation */}
 							<DeleteModal
 								show={showDeleteModal}
 								handleClose={handleClose}

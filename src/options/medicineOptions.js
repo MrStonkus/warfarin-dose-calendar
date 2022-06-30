@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid'
+
 export const colorOptions = [
 	{ value: '', label: 'Please select' },
 	{ value: 'red', label: 'Red' },
@@ -18,5 +20,22 @@ export const defSplits = [
 		label: 'Quarter of tablet',
 		isChecked: false,
 		isDisabled: false,
-	},
+	}
 ]
+
+export const defData = {
+	weeklyDose: 42.2,
+	startDate: '2020-01-01',
+	endDate: '2020-06-30',
+	medArr: [
+		{
+			id: uuidv4(),
+			name: 'Warfarinum',
+			mg: 5,
+			quantity: 100,
+			splitParts: [1, 0.5],
+			color: 'red',
+		},
+	],
+
+}

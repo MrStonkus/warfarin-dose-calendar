@@ -66,7 +66,6 @@ function AddMedicineModal({ medicines, setMedicines }) {
 					</div>
 					<div className="modal-body">
 						{/* modal body start ----------------------------------- */}
-
 						<form onSubmit={(event) => onSubmit(event, closeBtn)}>
 							<InputComp
 								labelText="Medicine name"
@@ -128,7 +127,6 @@ function AddMedicineModal({ medicines, setMedicines }) {
 								Close
 							</button>
 						</form>
-
 						{/* modal body end ----------------------------------- */}
 					</div>
 				</div>

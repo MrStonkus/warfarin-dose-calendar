@@ -47,12 +47,7 @@ function Dates({ dateRange, setDateRange }) {
 						</div>
 					</div>
 				</div>
-
-
-
-
 			</div>
-
 		</div>
 	)
 }

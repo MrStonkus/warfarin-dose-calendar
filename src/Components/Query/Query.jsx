@@ -10,7 +10,6 @@ function QueryDetails({
 	medicines,
 	setMedicines,
 }) {
-
 	return (
 		<div className="p-4">
 			<WeeklyDose wDose={wDose} setWDose={setWDose} />

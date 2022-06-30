@@ -35,7 +35,6 @@ function EditModal({ show, handleClose, medDetails, updateMed }) {
 					.map((split) => split.value),
 			}
 		)
-		// Close modal
 		handleClose()
 	}
 
