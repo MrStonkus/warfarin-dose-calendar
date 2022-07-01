@@ -19,3 +19,4 @@ Later I hope will do this automatically in the new version of this app.
 1. clone project
 2. npm i
 3. npm start
+   note: if you will have error regard CORS, just install and turn on this chrome extension: https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf
