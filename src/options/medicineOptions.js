@@ -23,19 +23,30 @@ export const defSplits = [
 	}
 ]
 
+const today = new Date()
+const today30 = new Date(today)
+today30.setDate(today30.getDate()+ 30)
+
 export const defData = {
-	weeklyDose: 42.2,
-	startDate: '2020-01-01',
-	endDate: '2020-06-30',
+	weeklyDose: 42.8,
+	startDate: today.toLocaleDateString('lt-LT'),
+	endDate: today30.toLocaleDateString('lt-LT'),
 	medArr: [
 		{
 			id: uuidv4(),
-			name: 'Warfarinum',
+			name: 'Warfarin grindex 5mg.',
 			mg: 5,
 			quantity: 100,
 			splitParts: [1, 0.5],
 			color: 'red',
 		},
+		{
+			id: uuidv4(),
+			name: 'Warfarin grindex 3mg.',
+			mg: 3,
+			quantity: 300,
+			splitParts: [1, 0.5],
+			color: 'blue',
+		}
 	],
-
 }
