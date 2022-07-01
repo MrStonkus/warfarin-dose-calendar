@@ -12,6 +12,8 @@ Additional example: you must have INR for 2.5 (just in case), but your blood tes
 
 Later I hope will do this automatically in the new version of this app.
 
+**Attention!** The owner of this app assumes no responsibility for its use. If you decide to use it, consult your doctor. You may use it at your own responsibility and risk.
+
 ## Install
 
 1. clone project
