@@ -54,19 +54,19 @@ function App() {
 			<main>
 				{isInputs ? (
 					<div className="container">
-					<div className="row">
+					<div className="row g-md-5">
 						<div className="col-md">
-						<QueryDetails
-							wDose={wDose}
-							setWDose={setWDose}
-							dateRange={dateRange}
-							setDateRange={setDateRange}
-							setMedicines={setMedicines}
-							medicines={medicines}
-						/>
+							<QueryDetails
+								wDose={wDose}
+								setWDose={setWDose}
+								dateRange={dateRange}
+								setDateRange={setDateRange}
+								setMedicines={setMedicines}
+								medicines={medicines}
+							/>
 						</div>
 						<div className="col-md">
-						<Calendar doses={doses} />
+							<Calendar doses={doses} />
 						</div>
 					</div>
 					</div>

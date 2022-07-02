@@ -12,8 +12,7 @@ function Calendar({ doses }) {
   }
 
   return (
-    <div className="p-4">
-
+    <div className="pt-sm-4 pt-4 pt-md-5">
       <h2 className='display-5'>Dosage Calendar</h2>
       <SimpleBarReact style={{ maxHeight: '75vh' }}>
         <table className="table mb-0 ">

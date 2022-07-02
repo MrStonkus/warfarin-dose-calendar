@@ -1,6 +1,6 @@
 function WeeklyDose({ wDose, setWDose }) {
 	return (
-		<fieldset className="input-row">
+		<fieldset className="input-row mt-0">
 			<h3 className="display-5">Weekly Dose</h3>
 			<div class="row">
 				<div class="col-sm">

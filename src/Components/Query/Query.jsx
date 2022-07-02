@@ -11,7 +11,7 @@ function QueryDetails({
 	setMedicines,
 }) {
 	return (
-		<div className="p-4">
+		<div className="pt-sm-4 pt-4 pt-md-5">
 			<WeeklyDose wDose={wDose} setWDose={setWDose} />
 			<Dates
 				dateRange={{ start: dateRange.start, end: dateRange.end }}
