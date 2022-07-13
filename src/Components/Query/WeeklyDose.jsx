@@ -2,8 +2,8 @@ function WeeklyDose({ wDose, setWDose }) {
 	return (
 		<fieldset className="input-row mt-0">
 			<h3 className="display-5">Weekly Dose</h3>
-			<div class="row">
-				<div class="col-sm">
+			<div className="row">
+				<div className="col-sm">
 					<div className="input-group">
 						<input
 							type="text"
@@ -20,7 +20,7 @@ function WeeklyDose({ wDose, setWDose }) {
 						</span>
 					</div>
 				</div>
-				<div class="col-sm">
+				<div className="col-sm">
 				</div>
 			</div>
 			<span className="form-text mb-2">
